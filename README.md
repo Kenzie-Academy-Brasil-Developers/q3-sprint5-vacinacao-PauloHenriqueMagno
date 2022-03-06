@@ -11,7 +11,7 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
 
 ### **GET /vaccinations**
 
-  Essa endpoint não é protegida, não requer nenhum parametro ou corpo da requisição.
+  Essa endpoint não requer autenticação, nenhum parametro e corpo de requisição.
 
   **Parâmetros opcionais:**
 
@@ -20,7 +20,7 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
   | page | Numero | 1 | O numero da página atual |
   | per_page | Numero | 5 | O numero de items por página |
 
-  **Exemplo de Resposta:**
+  **Exemplo de resposta da requisição:**
 
   ```
   {
@@ -61,12 +61,17 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
   É obrigatório no corpo da requisição os seguintes valores:
   
   | Valor | Examplo |
-  | cpf |  |
-  | name |  |
-  | vaccine_name |  |
-  | health_unit_name | |
+  |:----|:---:|
+  | cpf | "11234567893" |
+  | name | "Chrystian" |
+  | vaccine_name | "Pfizer" |
+  | health_unit_name | "Santa Rita" |
+  
+  Este endpoint não aceitará nenhum outro valor além dos citados acima.
  
-  **Examplo do corpo de requisição:**
+  **Examplo:**
+  
+  Corpo da requisição:
   ```
     {
       "cpf": "11234567893",
@@ -76,7 +81,7 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
     }
   ```
 
-  **Examplo de Resposta:**
+  Resposta:
   ```
     {
       "cpf": "11234567893",
@@ -87,3 +92,4 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
       "vaccine_name": "Pfizer"
     }
   ```
+    
