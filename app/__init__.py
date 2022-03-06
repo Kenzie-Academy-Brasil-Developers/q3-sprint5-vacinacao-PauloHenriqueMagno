@@ -10,7 +10,7 @@ def create_app():
     env = Env()
     env.read_env()
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = env("DB_URI")
+    app.config["SQLALCHEMY_DATABASE_URI"] = env("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     database.init_app(app)
