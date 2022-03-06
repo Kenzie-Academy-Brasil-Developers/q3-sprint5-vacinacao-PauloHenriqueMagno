@@ -3,17 +3,24 @@ from app.configs.database import db
 from app.models.vaccination_model import Vaccination
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import IntegrityError
+from werkzeug.exceptions import NotFound
 
 def get_vaccinations():
-  page = request.args.get("page", 1)
-  per_page = request.args.get("per_page", 5)
+  try:
+    page = int(request.args.get("page", 1))
+    per_page = int(request.args.get("per_page", 5))
 
-  session: Session = db.session
-  base_query = session.query(Vaccination)
+    session: Session = db.session
+    base_query = session.query(Vaccination)
 
-  vaccinations = base_query.paginate(page, per_page)
+    vaccinations = base_query.paginate(page, per_page)
 
-  return jsonify(vaccinations.items), 200
+    return jsonify({
+      "page": page,
+      "vaccinations": vaccinations.items
+    }), 200
+  except NotFound:
+    return jsonify({"msg": "Not found"}), 404
 
 def create_vaccination():
   try:
