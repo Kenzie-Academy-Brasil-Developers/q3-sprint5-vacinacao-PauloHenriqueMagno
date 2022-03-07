@@ -26,6 +26,7 @@ def create_vaccination():
   try:
     data = request.json
 
+    vaccination_data = {}
     vaccination_keys = ["cpf", "name", "vaccine_name", "health_unit_name"]
     correct_values = {
       "cpf": "str",
@@ -46,6 +47,8 @@ def create_vaccination():
       elif value_type != "str":
         invalid_values[key] = value_type
 
+      vaccination_data[key] = data.get(key)
+
     if len(missing_values) > 0:
       response = {
         "missing_keys": missing_values,
@@ -63,7 +66,7 @@ def create_vaccination():
     if len(data.get("cpf")) != 11:
       raise TypeError({"error": "cpf max length is 11", "cpf": data.get("cpf")})
 
-    vaccination = Vaccination(**data)
+    vaccination = Vaccination(**vaccination_data)
 
     db.session.add(vaccination)
     db.session.commit()
