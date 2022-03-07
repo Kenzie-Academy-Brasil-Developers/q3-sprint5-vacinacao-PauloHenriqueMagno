@@ -60,16 +60,25 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
 
   É obrigatório no corpo da requisição os seguintes valores:
   
-  | Valor | Examplo |
-  |:----|:---:|
-  | cpf | "11234567893" |
-  | name | "Chrystian" |
-  | vaccine_name | "Pfizer" |
-  | health_unit_name | "Santa Rita" |
+  | Valor | Tipo | Exemplo |
+  |:----|:---:|:---:|
+  | cpf | String | "11234567893" |
+  | name | String | "Chrystian" |
+  | vaccine_name | String | "Pfizer" |
+  | health_unit_name | String | "Santa Rita" |
   
-  Este endpoint não aceitará nenhum outro valor além dos citados acima.
+  Será ignorado qualquer outro valor além dos citados acima.  
  
-  **Examplo:**
+  Os valores devem ser compatíveis com as seguintes regras:
+  * cpf deve conter exatamente 11 caracteres.
+  * cpf deve ser unico.
+
+  Será levantado uma mensagem de erro caso:
+  * Algum valor seja de outro tipo a não ser string.
+  * Algum valor obrigatório estiver faltando.
+  * Alguma regra não seja seguida.
+
+  **Exemplo:**
   
   Corpo da requisição:
   ```
@@ -92,4 +101,3 @@ Essa api cria e acessa vacinas contra COVID-19 aplicadas e a sua próxima dose.
       "vaccine_name": "Pfizer"
     }
   ```
-    
