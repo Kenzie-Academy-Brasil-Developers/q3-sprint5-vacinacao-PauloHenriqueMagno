@@ -53,15 +53,15 @@ def create_vaccination():
       }
       raise TypeError(response)
 
-    if len(data.get("cpf")) > 11:
-      raise TypeError({"error": "cpf max length is 11", "cpf": data.get("cpf")})
-
     if len(invalid_values) > 0:
       response = {
         "correct_values": correct_values,
         "invalid_values": invalid_values
       }
       raise TypeError(response)
+
+    if len(data.get("cpf")) != 11:
+      raise TypeError({"error": "cpf max length is 11", "cpf": data.get("cpf")})
 
     vaccination = Vaccination(**data)
 
